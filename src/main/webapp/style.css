@@ -1,0 +1,55 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f2f5;
+    margin: 0;
+}
+
+.navbar {
+    background: #1f1f1f;
+    color: white;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.login-container, .welcome, .content, .contact, .about, .details {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+input, button {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+.card-container {
+    display: flex;
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 15px;
+    width: 45%;
+    box-shadow: 0 0 5px #aaa;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.card img {
+    width: 100px;
+    height: 100px;
+}
