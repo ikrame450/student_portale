@@ -1,0 +1,7 @@
+LogoutServlet.class
+com\mycompany\loginapplication\resources\JakartaEE10Resource.class
+LanguageServlet.class
+LoginServlet.class
+RegisterServlet.class
+ContactServlet.class
+com\mycompany\loginapplication\JakartaRestConfiguration.class
