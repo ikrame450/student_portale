@@ -2,103 +2,141 @@
 
 <!DOCTYPE html>
 <html lang="ar">
-    <head>    
-
+<head>    
     <meta charset="UTF-8">
-
     <title>حول الموقع</title>
+
     <style>
+        /* إعدادات عامة لجسم الصفحة */
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            direction: rtl;
+            direction: rtl; /* من اليمين لليسار */
             background-color: #f9f9f9;
-            padding-top: 80px; /* ارتفاع الـ navbar تقريبًا */
+            padding-top: 70px; /* لإفساح مساحة للنافبار المثبت في الأعلى */
         }
 
-       nav {
-            background-color: #1696a6;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
+        /* تصميم شريط التنقل (Navbar) */
+        nav {
+            background: linear-gradient(to right, #2193b0, #6dd5ed, #cc2b5e);
+            padding: 15px 40px;
+            display: flex;               /* تفعيل Flexbox لترتيب المحتوى في صف */
+            align-items: center;         /* محاذاة عمودية وسطية لكل العناصر */
+            justify-content: space-between; /* توزيع المسافات بين العناصر */
+            position: fixed;             /* تثبيت النافبار في أعلى الصفحة */
             top: 0;
             width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;               /* ليكون فوق باقي المحتوى */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* ظل خفيف */
         }
 
-        .nav-section {
-            flex: 1;
-            display: flex;
-            justify-content: flex-start;
-            gap: 25px;
+        /* حاوية روابط النافبار (تأخذ معظم العرض) */
+        .nav-links {
+            display: flex;               /* لترتيب الروابط أفقياً */
+            gap: 20px;                  /* فراغ بين الروابط */
+            align-items: center;         /* محاذاة عمودية وسطية */
+            flex-grow: 1;                /* لتأخذ أكبر مساحة ممكنة */
+            justify-content: flex-start; /* تبدأ من اليمين بسبب rtl */
         }
 
-        .nav-section.center {
-            justify-content: flex-end;
-        }
-
-        .nav-section.left {
-            justify-content: flex-end;
-        }
-
+        /* روابط النافبار */
         nav a {
             color: white;
             text-decoration: none;
             font-size: 17px;
+            padding: 5px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap;         /* لمنع التفاف النص إلى أسطر */
         }
 
+        /* تأثير عند مرور الماوس على الرابط */
         nav a:hover {
-            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.3);
         }
-        
-         .user-info {
-            color: white;
-            font-size: 18px;
+
+        /* الرابط النشط */
+        nav a.active {
+            background-color: #cc2b5e;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* صندوق الترحيب مع صورة المستخدم على نفس استقامة الروابط */
+        .user-info {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;                  /* مسافة بين الصورة والنص */
+            color: white;
+            font-size: 18px;
+            white-space: nowrap;        /* عدم التفاف النص */
+            margin-left: 30px;          /* مسافة بين روابط و صندوق الترحيب */
+            flex-shrink: 0;             /* عدم تصغير الصندوق */
         }
 
+        /* صورة المستخدم داخل صندوق الترحيب */
         .user-info img {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;         /* لجعل الصورة دائرية */
+            object-fit: cover;          /* لتغطية الصندوق دون تشويه */
         }
 
+        /* صندوق المحتوى الأساسي */
         .content {
             padding: 40px;
-            background: linear-gradient(to right, #48c6ef, #6f86d6);            
+            background: linear-gradient(to right, #2193b0, #6dd5ed, #cc2b5e);
             margin: 50px auto;
             width: 80%;
             border-radius: 15px;
             box-shadow: 0 0 8px #ccc;
+            color: white;
+            line-height: 1.6;
         }
     </style>
+
+    <script>
+        // سكريبت لجعل الرابط الحالي في النافبار يتلون بشكل مختلف (رابط نشط)
+        window.addEventListener('DOMContentLoaded', () => {
+            const links = document.querySelectorAll('nav a');
+            const currentPath = window.location.pathname.split('/').pop();
+
+            links.forEach(link => {
+                const linkPath = link.getAttribute('href').split('/').pop();
+                if (linkPath === currentPath) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        });
+    </script>
 </head>
+
 <body>
 
 <nav>
-    <!-- يمين الروابط -->
-    <div class="nav-section right">
+    <!-- روابط النافبار مع صندوق الترحيب في نفس السطر -->
+    <div class="nav-links">
         <a href="home.jsp">الرئيسية</a>
         <a href="contact.jsp">اتصل بنا</a>
         <a href="about.jsp">حول</a>
+        <%
+        String role = (String) session.getAttribute("role");
+        if ("admin".equals(role)) {
+        %>
+        <a href="messages.jsp">📨 الرسائل</a>
+        <%
+        }
+        %>
         <a href="LogoutServlet">تسجيل الخروج</a>
-    </div>
 
-    <!-- وسط: ترحيب مع صورة -->
-    <div class="nav-section center">
+        <!-- صندوق الترحيب مع صورة المستخدم -->
         <div class="user-info">
-            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Icon" style="width: 32px; height: 32px; border-radius: 50%; vertical-align: middle; margin-left: 10px;"><!--  -->  
+            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Icon" />
             مرحباً، <%= session.getAttribute("username") %>
         </div>
     </div>
-
-    <!-- يسار فارغ لتوازن التصميم -->
-    <div class="nav-section left"></div>
 </nav>
 
 <div class="content">

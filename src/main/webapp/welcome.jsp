@@ -1,50 +1,77 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!-- تحديد نوع محتوى الصفحة وترميزها إلى UTF-8 لدعم اللغة العربية وتحديد لغة الصفحة كلغة جافا -->
+
 <!DOCTYPE html>
+<!-- تعريف نوع المستند بأنه HTML5 -->
+
 <html lang="ar">
+<!-- بداية صفحة HTML مع تعيين اللغة إلى العربية -->
+
 <head>
+    <!-- بداية رأس الصفحة -->
     
     <meta charset="UTF-8">
+    <!-- تعيين ترميز الأحرف للصفحة إلى UTF-8 لدعم الأحرف العربية -->
+
     <title>أهلاً بك</title>
+    <!-- عنوان الصفحة الذي يظهر في شريط عنوان المتصفح -->
+
     <style>
+        /* بداية تعريف تنسيقات CSS للصفحة */
         body {
-            direction: rtl;
-            background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+            direction: rtl; /* جعل اتجاه النص من اليمين إلى اليسار */
+            background: linear-gradient(to left, #2193b0, #6dd5ed, #cc2b5e);
+            /* تعيين خلفية متدرجة ألوانها من الأزرق إلى الوردي */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 100px;
+            /* تعيين نوع الخط لقراءة مريحة وجميلة */
+            text-align: center; /* توسيط النص داخل الصفحة */
+            padding-top: 100px; /* مسافة علوية بين محتوى الصفحة وحدود النافذة */
         }
         .message {
-            background-color: #fff;
-            margin: auto;
-            padding: 40px;
-            width: 50%;
-            border-radius: 15px;
-            box-shadow: 0 0 10px #999;
+            background-color: #fff; /* خلفية بيضاء لصندوق الرسالة */
+            margin: auto; /* جعل الصندوق في منتصف الصفحة أفقياً */
+            padding: 40px; /* حشو داخلي بمقدار 40 بكسل من جميع الجهات */
+            width: 50%; /* عرض الصندوق 50% من عرض النافذة */
+            border-radius: 15px; /* حواف مستديرة بزاوية 15 بكسل */
+            box-shadow: 0 0 10px #999; /* ظل ناعم حول الصندوق لإبراز */
         }
         .btn {
-            display: inline-block;
-            margin-top: 30px;
-            background-color: #1696a6;
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 16px;
+            display: inline-block; /* عرض ككتلة داخلية تسمح بوضع أزرار بجانب بعضها */
+            margin-top: 30px; /* مسافة علوية 30 بكسل */
+            background-color: #1696a6; /* لون خلفية الأزرق الداكن */
+            color: white; /* لون الخط أبيض */
+            padding: 12px 25px; /* حشو داخلي للأزرار رأسياً وأفقياً */
+            border: none; /* إزالة حدود الزر */
+            border-radius: 6px; /* جعل حواف الأزرار مستديرة */
+            text-decoration: none; /* إزالة أي خط تحت النص */
+            font-size: 16px; /* حجم الخط داخل الأزرار */
         }
         .btn:hover {
-            background-color: #117988;
+            background-color: #117988; /* تغير لون الخلفية عند المرور بالفأرة */
         }
     </style>
 </head>
+
 <body>
+<!-- بداية جسم الصفحة -->
 
 <div class="message">
+    <!-- صندوق يحتوي رسالة الترحيب والمعلومات -->
+
     <h1>تم تسجيل الدخول بنجاح!</h1>
+    <!-- عنوان رئيسي يوضح نجاح تسجيل الدخول -->
+
     <p>مرحباً بك في موقعنا لتعلم البرمجة.</p>
+    <!-- فقرة ترحيبية بالمستخدم -->
+
+    <p>دورك هو: <%= session.getAttribute("role") %></p>
+    <!-- عرض دور المستخدم (مثل: مستخدم، مدير) المسترجع من جلسة المستخدم -->
+
     <a href="LogoutServlet" class="btn">تسجيل الخروج</a>
+    <!-- زر ارتباط يؤدي إلى تنفيذ تسجيل الخروج عبر سيرفلت LogoutServlet -->
 
     <a href="home.jsp" class="btn">الذهاب إلى الصفحة الرئيسية</a>
+    <!-- زر ارتباط يعيد المستخدم إلى الصفحة الرئيسية للموقع -->
 </div>
 
 </body>

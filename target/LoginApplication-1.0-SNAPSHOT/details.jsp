@@ -62,12 +62,14 @@
             padding-top: 80px;
         }
 
+      
+      /* شريط التنقل - navbar */
         nav {
-            background-color: #1696a6;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: linear-gradient(to right, #2193b0, #6dd5ed, #cc2b5e);
+            padding: 15px 40px;
+            display: flex;            /* نستخدم فليكس ليكون المحتوى في سطر واحد */
+            align-items: center;      /* محاذاة رأسية وسطية */
+            justify-content: space-between; /* توزيع العناصر على كامل العرض */
             position: fixed;
             top: 0;
             width: 100%;
@@ -75,47 +77,57 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-section {
-            flex: 1;
+        /* روابط النافبار مع رسالة الترحيب والشعار كلها في سطر واحد */
+        .nav-links {
             display: flex;
-            justify-content: flex-start;
-            gap: 25px;
+            gap: 20px; /* مسافة بين الروابط */
+            align-items: center;
+            flex-grow: 1; /* لكي تأخذ كل المساحة المتاحة */
+            justify-content: flex-start; /* تبدأ من اليمين بسبب rtl */
         }
 
-        .nav-section.center {
-            justify-content: flex-end;
-        }
-
-        .nav-section.left {
-            justify-content: flex-end;
-        }
-
+        /* تصميم الروابط */
         nav a {
             color: white;
             text-decoration: none;
             font-size: 17px;
+            padding: 5px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            white-space: nowrap; /* لا تكسر النص */
         }
 
         nav a:hover {
-            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.3);
         }
 
+        nav a.active {
+            background-color: #cc2b5e;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* صندوق الترحيب مع الشعار بجانب الروابط */
         .user-info {
-            color: white;
-            font-size: 18px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            color: white;
+            font-size: 18px;
+            white-space: nowrap; /* نص لا يكسر */
+            margin-left: 30px; /* مسافة بين روابط و الترحيب */
+            flex-shrink: 0; /* لا يقلص */
         }
 
         .user-info img {
-            width: 28px;
-            height: 28px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            object-fit: cover;
         }
 
         .card {
-            background: linear-gradient(to right, #48c6ef, #6f86d6);
+            background: linear-gradient(to right, #2193b0, #6dd5ed, #cc2b5e);
             padding: 30px;
             width: 75%;
             margin: 40px auto;
@@ -155,8 +167,8 @@
         }
 
         .video-section {
-    background: linear-gradient(to right, #48c6ef, #6f86d6);
-    width: 75%;
+ background: linear-gradient(to right, #2193b0, #6dd5ed, #cc2b5e);
+ width: 75%;
     margin: 0 auto 50px auto;
     padding: 20px;
     border-radius: 15px;
@@ -177,21 +189,25 @@
 
 <!-- Navbar -->
 <nav>
-    <div class="nav-section right">
+    <div class="nav-links">
         <a href="home.jsp">الرئيسية</a>
         <a href="contact.jsp">اتصل بنا</a>
         <a href="about.jsp">حول</a>
+        <%
+            String role = (String) session.getAttribute("role");
+            if ("admin".equals(role)) {
+        %>
+        <a href="messages.jsp">📨 الرسائل</a>
+        <%
+            }
+        %>
         <a href="LogoutServlet">تسجيل الخروج</a>
     </div>
 
-    <div class="nav-section center">
-        <div class="user-info">
-            <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Icon">
-            مرحباً، <%= session.getAttribute("username") %>
-        </div>
+    <div class="user-info">
+        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="User Icon">
+        مرحباً، <%= session.getAttribute("username") %>
     </div>
-
-    <div class="nav-section left"></div>
 </nav>
 
 <!-- Card Section -->
